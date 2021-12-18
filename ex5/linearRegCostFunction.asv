@@ -1,0 +1,46 @@
+function [J, grad] = linearRegCostFunction(X, y, theta, lambda)
+%LINEARREGCOSTFUNCTION Compute cost and gradient for regularized linear 
+%regression with multiple variables
+%   [J, grad] = LINEARREGCOSTFUNCTION(X, y, theta, lambda) computes the 
+%   cost of using theta as the parameter for linear regression to fit the 
+%   data points in X and y. Returns the cost in J and the gradient in grad
+
+% Initialize some useful values
+m = length(y); % number of training examples
+
+% You need to return the following variables correctly 
+J = 0; %#ok<*NASGU> 
+grad = zeros(size(theta)); %#ok<*PREALL> 
+
+% ====================== YOUR CODE HERE ======================
+% Instructions: Compute the cost and gradient of regularized linear 
+%               regression for a particular choice of theta.
+%
+%               You should set J to the cost and grad to the gradient.
+%
+% Hypothesis
+h = X * theta;
+% Error between predcited vs actual
+error = h - y;
+% Error squared
+error_sqr = sum(error.^2);
+% Unregularized Cost Function J
+J_unreg = (1/(2*m)) * (error_sqr);
+% Unregularized Gradient
+grad_unreg = (1/m) * (X' * error);
+
+% Regularized Coat Function
+theta(1) = 0;
+theta_sum = sum(theta.^2);
+J_reg = (lambda/(2*m)) * theta_sum;
+% Regualarized Gradient
+grad_reg = (lambda/m) * theta;
+
+% Final Cost Function
+J = J_unreg + J_reg;
+grad = grad_unreg + grad_reg;
+% =========================================================================
+
+grad = grad(:);
+
+end
