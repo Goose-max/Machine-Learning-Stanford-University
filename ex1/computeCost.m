@@ -12,10 +12,10 @@ J = 0;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
-h = X * theta;
-error = h - y;
-error_sqr = error.^2;
-J = 1/(2*m) * sum(error_sqr);
+h = X * theta;                % Hypothesis Calculation
+error = h - y;                % Error between Actual & Hypothesis
+error_sqr = error.^2;         % Squaring Errors
+J = 1/(2*m) * sum(error_sqr); % Cost Function
 
 % =========================================================================
 
